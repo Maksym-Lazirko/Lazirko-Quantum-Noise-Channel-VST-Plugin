@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio Version 18
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lazirko - Standalone Plugin", "Lazirko_StandalonePlugin.vcxproj", "{6CC111A6-6985-089E-69A3-10D6B169B914}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A13E248E-9848-1526-2CEA-1B18A80DE145} = {A13E248E-9848-1526-2CEA-1B18A80DE145}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lazirko - VST3", "Lazirko_VST3.vcxproj", "{95A1654B-E081-AA86-4C52-72E666E427A4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A13E248E-9848-1526-2CEA-1B18A80DE145} = {A13E248E-9848-1526-2CEA-1B18A80DE145}
+		{04868B74-853F-FE3D-E8E4-8D4A3A659085} = {04868B74-853F-FE3D-E8E4-8D4A3A659085}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lazirko - Shared Code", "Lazirko_SharedCode.vcxproj", "{A13E248E-9848-1526-2CEA-1B18A80DE145}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lazirko - VST3 Manifest Helper", "Lazirko_VST3ManifestHelper.vcxproj", "{04868B74-853F-FE3D-E8E4-8D4A3A659085}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95A1654B-E081-AA86-4C52-72E666E427A4}.Debug|x64.ActiveCfg = Debug|x64
+		{95A1654B-E081-AA86-4C52-72E666E427A4}.Debug|x64.Build.0 = Debug|x64
+		{95A1654B-E081-AA86-4C52-72E666E427A4}.Release|x64.ActiveCfg = Release|x64
+		{95A1654B-E081-AA86-4C52-72E666E427A4}.Release|x64.Build.0 = Release|x64
+		{6CC111A6-6985-089E-69A3-10D6B169B914}.Debug|x64.ActiveCfg = Debug|x64
+		{6CC111A6-6985-089E-69A3-10D6B169B914}.Debug|x64.Build.0 = Debug|x64
+		{6CC111A6-6985-089E-69A3-10D6B169B914}.Release|x64.ActiveCfg = Release|x64
+		{6CC111A6-6985-089E-69A3-10D6B169B914}.Release|x64.Build.0 = Release|x64
+		{A13E248E-9848-1526-2CEA-1B18A80DE145}.Debug|x64.ActiveCfg = Debug|x64
+		{A13E248E-9848-1526-2CEA-1B18A80DE145}.Debug|x64.Build.0 = Debug|x64
+		{A13E248E-9848-1526-2CEA-1B18A80DE145}.Release|x64.ActiveCfg = Release|x64
+		{A13E248E-9848-1526-2CEA-1B18A80DE145}.Release|x64.Build.0 = Release|x64
+		{04868B74-853F-FE3D-E8E4-8D4A3A659085}.Debug|x64.ActiveCfg = Debug|x64
+		{04868B74-853F-FE3D-E8E4-8D4A3A659085}.Debug|x64.Build.0 = Debug|x64
+		{04868B74-853F-FE3D-E8E4-8D4A3A659085}.Release|x64.ActiveCfg = Release|x64
+		{04868B74-853F-FE3D-E8E4-8D4A3A659085}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

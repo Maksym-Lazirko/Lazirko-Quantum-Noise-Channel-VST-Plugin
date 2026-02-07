@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="FIt6SQ" name="Lazirko" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1"
+              companyName="Lazirko Records" pluginName="Quantum Noise Channel"
+              pluginDescription="Quantum Noise Channel">
   <MAINGROUP id="MzWC41" name="Lazirko">
     <GROUP id="{8B6F4640-7920-42E4-EB87-9FF58008E563}" name="Source">
       <FILE id="oUPqr2" name="PluginProcessor.cpp" compile="1" resource="0"

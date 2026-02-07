@@ -41,16 +41,16 @@
  #define JucePlugin_Enable_ARA             0
 #endif
 #ifndef  JucePlugin_Name
- #define JucePlugin_Name                   "Lazirko"
+ #define JucePlugin_Name                   "Quantum Noise Channel"
 #endif
 #ifndef  JucePlugin_Desc
- #define JucePlugin_Desc                   "Lazirko"
+ #define JucePlugin_Desc                   "Quantum Noise Channel"
 #endif
 #ifndef  JucePlugin_Manufacturer
- #define JucePlugin_Manufacturer           "yourcompany"
+ #define JucePlugin_Manufacturer           "Lazirko Records"
 #endif
 #ifndef  JucePlugin_ManufacturerWebsite
- #define JucePlugin_ManufacturerWebsite    "www.yourcompany.com"
+ #define JucePlugin_ManufacturerWebsite    "www.lazirkorecords.com"
 #endif
 #ifndef  JucePlugin_ManufacturerEmail
  #define JucePlugin_ManufacturerEmail      ""
@@ -137,7 +137,7 @@
  #define JucePlugin_IAASubType             JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_IAAName
- #define JucePlugin_IAAName                "yourcompany: Lazirko"
+ #define JucePlugin_IAAName                "Lazirko Records: Quantum Noise Channel"
 #endif
 #ifndef  JucePlugin_VSTNumMidiInputs
  #define JucePlugin_VSTNumMidiInputs       16

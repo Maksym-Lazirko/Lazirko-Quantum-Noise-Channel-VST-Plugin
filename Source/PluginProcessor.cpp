@@ -7,13 +7,13 @@
 LazirkoAudioProcessor::LazirkoAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
     : AudioProcessor(BusesProperties()
-#if ! JucePlugin_IsMidiEffect
-#if ! JucePlugin_IsSynth
+                      #if ! JucePlugin_IsMidiEffect
+                       #if ! JucePlugin_IsSynth
         .withInput("Input", juce::AudioChannelSet::stereo(), true)
-#endif
+                       #endif
         .withOutput("Output", juce::AudioChannelSet::stereo(), true)
-#endif
-    ),
+                      #endif
+                      ),
     parameters(*this, nullptr, "PARAMETERS", createParameterLayout())
 #else
     : parameters(*this, nullptr, "PARAMETERS", createParameterLayout())
@@ -32,29 +32,29 @@ const juce::String LazirkoAudioProcessor::getName() const { return JucePlugin_Na
 
 bool LazirkoAudioProcessor::acceptsMidi() const
 {
-#if JucePlugin_WantsMidiInput
+   #if JucePlugin_WantsMidiInput
     return true;
-#else
+   #else
     return false;
-#endif
+   #endif
 }
 
 bool LazirkoAudioProcessor::producesMidi() const
 {
-#if JucePlugin_ProducesMidiOutput
+   #if JucePlugin_ProducesMidiOutput
     return true;
-#else
+   #else
     return false;
-#endif
+   #endif
 }
 
 bool LazirkoAudioProcessor::isMidiEffect() const
 {
-#if JucePlugin_IsMidiEffect
+   #if JucePlugin_IsMidiEffect
     return true;
-#else
+   #else
     return false;
-#endif
+   #endif
 }
 
 double LazirkoAudioProcessor::getTailLengthSeconds() const { return 0.0; }
@@ -62,6 +62,9 @@ double LazirkoAudioProcessor::getTailLengthSeconds() const { return 0.0; }
 int LazirkoAudioProcessor::getNumPrograms() { return 1; }
 
 int LazirkoAudioProcessor::getCurrentProgram() { return 0; }
+void LazirkoAudioProcessor::setCurrentProgram (int) {}
+const juce::String LazirkoAudioProcessor::getProgramName (int) { return {}; }
+void LazirkoAudioProcessor::changeProgramName (int, const juce::String&) {}
 
 void LazirkoAudioProcessor::setCurrentProgram(int) {}
 
@@ -143,21 +146,21 @@ void LazirkoAudioProcessor::setupFilters(double sampleRate, float cutoffFreq)
 #ifndef JucePlugin_PreferredChannelConfigurations
 bool LazirkoAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const
 {
-#if JucePlugin_IsMidiEffect
+   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused(layouts);
     return true;
-#else
+   #else
     if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
         && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
         return false;
 
-#if ! JucePlugin_IsSynth
+   #if ! JucePlugin_IsSynth
     if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
         return false;
-#endif
+   #endif
 
     return true;
-#endif
+   #endif
 }
 #endif
 
@@ -364,9 +367,9 @@ void LazirkoAudioProcessor::processMonoMode(juce::AudioBuffer<float>& buffer, in
 
         float output = dry * (1.0f - mixVal) + wet * mixVal;
 
-        for (int ch = 0; ch < totalNumOutputChannels; ++ch)
+    for (int ch = 0; ch < totalNumOutputChannels; ++ch)
             buffer.setSample(ch, n, output);
-    }
+}
 }
 
 void LazirkoAudioProcessor::processLeftRightMode(juce::AudioBuffer<float>& buffer, int numSamples)
@@ -382,12 +385,12 @@ void LazirkoAudioProcessor::processLeftRightMode(juce::AudioBuffer<float>& buffe
             sizeof(float) * static_cast<size_t>(numSamples));
     }
     else if (totalNumInputChannels == 1)
-    {
+{
         std::memcpy(dryBufferA.data(), buffer.getReadPointer(0),
             sizeof(float) * static_cast<size_t>(numSamples));
         std::memcpy(dryBufferB.data(), buffer.getReadPointer(0),
             sizeof(float) * static_cast<size_t>(numSamples));
-    }
+}
 
     float leftInRMS = calculateRMS(dryBufferA.data(), numSamples);
     float rightInRMS = calculateRMS(dryBufferB.data(), numSamples);
@@ -395,10 +398,10 @@ void LazirkoAudioProcessor::processLeftRightMode(juce::AudioBuffer<float>& buffe
 
     // Encode
     for (int n = 0; n < numSamples; ++n)
-    {
+{
         quantumStateA[static_cast<size_t>(n)] = Complex(dryBufferA[static_cast<size_t>(n)], 0.0);
         quantumStateB[static_cast<size_t>(n)] = Complex(dryBufferB[static_cast<size_t>(n)], 0.0);
-    }
+}
 
     // Process
     float dephase = smoothedDephasing.getCurrentValue();
@@ -408,10 +411,10 @@ void LazirkoAudioProcessor::processLeftRightMode(juce::AudioBuffer<float>& buffe
 
     // Decode
     for (int n = 0; n < numSamples; ++n)
-    {
+{
         wetBufferA[static_cast<size_t>(n)] = static_cast<float>(quantumStateA[static_cast<size_t>(n)].real());
         wetBufferB[static_cast<size_t>(n)] = static_cast<float>(quantumStateB[static_cast<size_t>(n)].real());
-    }
+}
 
     float leftOutRMS = calculateRMS(wetBufferA.data(), numSamples);
     float rightOutRMS = calculateRMS(wetBufferB.data(), numSamples);
@@ -426,7 +429,7 @@ void LazirkoAudioProcessor::processLeftRightMode(juce::AudioBuffer<float>& buffe
 
     // Mix
     for (int n = 0; n < numSamples; ++n)
-    {
+{
         float gainComp = smoothedGainCompensation.getNextValue();
         float mixVal = smoothedMix.getNextValue();
 
@@ -460,11 +463,11 @@ void LazirkoAudioProcessor::processMidSideMode(juce::AudioBuffer<float>& buffer,
 
     // Encode M/S
     if (totalNumInputChannels >= 2)
-    {
+{
         const float* leftIn = buffer.getReadPointer(0);
         const float* rightIn = buffer.getReadPointer(1);
         for (int n = 0; n < numSamples; ++n)
-        {
+    {
             float L = leftIn[n];
             float R = rightIn[n];
             dryBufferA[static_cast<size_t>(n)] = L + R;
@@ -476,7 +479,7 @@ void LazirkoAudioProcessor::processMidSideMode(juce::AudioBuffer<float>& buffer,
         std::memcpy(dryBufferA.data(), buffer.getReadPointer(0),
             sizeof(float) * static_cast<size_t>(numSamples));
         std::memset(dryBufferB.data(), 0, sizeof(float) * static_cast<size_t>(numSamples));
-    }
+}
 
     float midInRMS = calculateRMS(dryBufferA.data(), numSamples);
     float sideInRMS = calculateRMS(dryBufferB.data(), numSamples);
@@ -484,7 +487,7 @@ void LazirkoAudioProcessor::processMidSideMode(juce::AudioBuffer<float>& buffer,
 
     // Encode
     for (int n = 0; n < numSamples; ++n)
-    {
+{
         quantumStateA[static_cast<size_t>(n)] = Complex(dryBufferA[static_cast<size_t>(n)], 0.0);
         quantumStateB[static_cast<size_t>(n)] = Complex(dryBufferB[static_cast<size_t>(n)], 0.0);
     }
@@ -520,7 +523,7 @@ void LazirkoAudioProcessor::processMidSideMode(juce::AudioBuffer<float>& buffer,
         float* rightOut = buffer.getWritePointer(1);
 
         for (int n = 0; n < numSamples; ++n)
-        {
+{
             float gainComp = smoothedGainCompensation.getNextValue();
             float mixVal = smoothedMix.getNextValue();
 
@@ -554,11 +557,11 @@ void LazirkoAudioProcessor::processMidSideMode(juce::AudioBuffer<float>& buffer,
 
             output[n] = dryM * (1.0f - mixVal) + wetM * mixVal;
         }
+        }
     }
-}
 
 void LazirkoAudioProcessor::processTransientSustainMode(juce::AudioBuffer<float>& buffer, int numSamples)
-{
+        {
     auto totalNumInputChannels = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
@@ -574,7 +577,7 @@ void LazirkoAudioProcessor::processTransientSustainMode(juce::AudioBuffer<float>
 
     // Split transient/sustain and store
     for (int n = 0; n < numSamples; ++n)
-    {
+            {
         float l = inL[n];
         float r = inR[n];
 
@@ -647,7 +650,7 @@ void LazirkoAudioProcessor::processTransientSustainMode(juce::AudioBuffer<float>
         outL[n] = lHP + finalSustainL;
         outR[n] = rHP + finalSustainR;
     }
-}
+    }
 
 juce::AudioProcessorEditor* LazirkoAudioProcessor::createEditor()
 {
@@ -660,11 +663,11 @@ bool LazirkoAudioProcessor::hasEditor() const
 }
 
 void LazirkoAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
-{
+    {
     auto state = parameters.copyState();
     std::unique_ptr<juce::XmlElement> xml(state.createXml());
     copyXmlToBinary(*xml, destData);
-}
+    }
 
 void LazirkoAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
 {

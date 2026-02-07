@@ -4,10 +4,10 @@ LazirkoAudioProcessorEditor::LazirkoAudioProcessorEditor(LazirkoAudioProcessor& 
     : AudioProcessorEditor(&p), processor(p)
 {
     auto setupSlider = [](juce::Slider& s)
-        {
+    {
             s.setSliderStyle(juce::Slider::Rotary);
             s.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 60, 20);
-        };
+    };
 
     setupSlider(dephaseSlider);
     setupSlider(dampingSlider);
@@ -69,7 +69,7 @@ void LazirkoAudioProcessorEditor::paint(juce::Graphics& g)
     g.setColour(juce::Colours::white);
     g.setFont(juce::FontOptions(16.0f));
     g.drawFittedText("Quantum Noise Channel", getLocalBounds().removeFromTop(30),
-        juce::Justification::centred, 1);
+                      juce::Justification::centred, 1);
 }
 
 void LazirkoAudioProcessorEditor::resized()
@@ -83,17 +83,17 @@ void LazirkoAudioProcessorEditor::resized()
     auto dephaseArea = row.removeFromLeft(colWidth).reduced(8);
     dephaseSlider.setBounds(dephaseArea);
     dephaseLabel.setBounds(dephaseArea.getX(), dephaseArea.getBottom() + 4,
-        dephaseArea.getWidth(), 20);
+                            dephaseArea.getWidth(), 20);
 
     auto dampingArea = row.removeFromLeft(colWidth).reduced(8);
     dampingSlider.setBounds(dampingArea);
     dampingLabel.setBounds(dampingArea.getX(), dampingArea.getBottom() + 4,
-        dampingArea.getWidth(), 20);
+                            dampingArea.getWidth(), 20);
 
     auto mixArea = row.removeFromLeft(colWidth).reduced(8);
     mixSlider.setBounds(mixArea);
     mixLabel.setBounds(mixArea.getX(), mixArea.getBottom() + 4,
-        mixArea.getWidth(), 20);
+                        mixArea.getWidth(), 20);
 
     r.removeFromTop(10);
     auto buttonArea = r.removeFromTop(30);

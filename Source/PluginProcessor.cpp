@@ -1,4 +1,4 @@
-﻿#include "PluginProcessor.h"
+#include "PluginProcessor.h"
 
 #include "PluginEditor.h"
 
@@ -62,14 +62,8 @@ double LazirkoAudioProcessor::getTailLengthSeconds() const { return 0.0; }
 int LazirkoAudioProcessor::getNumPrograms() { return 1; }
 
 int LazirkoAudioProcessor::getCurrentProgram() { return 0; }
-void LazirkoAudioProcessor::setCurrentProgram (int) {}
-const juce::String LazirkoAudioProcessor::getProgramName (int) { return {}; }
-void LazirkoAudioProcessor::changeProgramName (int, const juce::String&) {}
-
 void LazirkoAudioProcessor::setCurrentProgram(int) {}
-
 const juce::String LazirkoAudioProcessor::getProgramName(int) { return {}; }
-
 void LazirkoAudioProcessor::changeProgramName(int, const juce::String&) {}
 
 juce::AudioProcessorValueTreeState::ParameterLayout LazirkoAudioProcessor::createParameterLayout()

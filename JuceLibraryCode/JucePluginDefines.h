@@ -53,7 +53,7 @@
  #define JucePlugin_ManufacturerWebsite    "www.lazirkorecords.com"
 #endif
 #ifndef  JucePlugin_ManufacturerEmail
- #define JucePlugin_ManufacturerEmail      ""
+ #define JucePlugin_ManufacturerEmail      "rockmastermax@gmail.com"
 #endif
 #ifndef  JucePlugin_ManufacturerCode
  #define JucePlugin_ManufacturerCode       0x4d616e75
